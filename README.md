@@ -1,5 +1,9 @@
 # aap-rpm-installation
 
+This repository contains information and resource files to support AAP installation via RPM onto nodes running in local VMs, mainly for debugging customer issues.
+
+## General Notes
+
 - The following step-by-step instructions assume that the working directory is this repo, e.g. `~/repos/aap-rpm-installation`.
 - The aap installer can be run on the host or on the controller node VM. This description focuses on running setup.sh from the host.
 - If running setup.sh on the host complains about the wrong ansible-core version (e.g. "Unable to install the required version of ansible-core (2.16)"), you should run setup.sh from a Python venv: 
