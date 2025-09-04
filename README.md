@@ -24,7 +24,9 @@
 2. Copy the backup file (e.g. `automation-platform-backup-latest.tar.gz`) into the extracted setup-bundle of the installer from step 1.
 3. Make sure the `inventory-for-setup-x.x` contains the correct IPv4 addresses.
 4. Execute setup.sh in the setup-bundle from step 1 with option -r, e.g. `~/repos/aap-rpm-installation/ansible-automation-platform-setup-bundle-2.4-6.2-x86_64/setup.sh -i ~/repos/aap-rpm-installation/inventory-for-setup-2.4 -r`
-5. (Optional) If the backup file is in another location, add `-e "restore_backup_file=<path-to-backup-file>"` to the setup.sh command line.
+
+Notes:
+- If the backup file is in another location (than the setup-bundle root), add `-e "restore_backup_file=<path-to-backup-file>"` to the setup.sh command line.
 
 ## Steps for updating AAP
 
