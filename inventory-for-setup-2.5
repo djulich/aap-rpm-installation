@@ -1,0 +1,35 @@
+[automationcontroller]
+192.168.10.150 ansible_user=ansible ansible_become=true
+
+[automationgateway]
+192.168.10.151 ansible_user=ansible ansible_become=true
+
+[database]
+192.168.10.152 ansible_user=ansible ansible_become=true
+
+[all:vars]
+# Web UI admin password
+admin_password='admin'
+
+# Database passwords (must not be empty!)
+redis_password='admin'
+redis_mode=standalone
+
+# Optional, but good to define explicitly
+pg_host='192.168.10.152'
+pg_port='5432'
+pg_database='awx'
+pg_username='awx'
+pg_password='admin'
+
+automationgateway_admin_password='admin'
+automationgateway_pg_host='192.168.10.152'
+automationgateway_pg_port=5432
+automationgateway_pg_database='automationgateway'
+automationgateway_pg_username='automationgateway'
+automationgateway_pg_password='admin'
+
+
+# Disable SSL for simplicity (you can enable later)
+# controller_use_ssl=false
+bundle_install=true
