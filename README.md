@@ -1,6 +1,6 @@
 # aap-rpm-installation
 
-## Steps to install AAP 2.4 or 2.5
+## Steps to install AAP 2.4 or 2.5 on your laptop
 
 1. Download RHEL image from here: https://access.redhat.com/downloads/content/rhel
 2. Copy RHEL image to libvirt image folder, e.g. `/var/lib/libvirt/images/rhel-9.6-x86_64-dvd.iso`
