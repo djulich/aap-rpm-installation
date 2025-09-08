@@ -2,20 +2,6 @@
 
 This repository contains information and resource files to support AAP installation via RPM onto nodes running in local VMs, mainly for debugging customer issues.
 
-## General Notes
-
-- The following step-by-step instructions assume that the working directory is this repo, e.g. `~/repos/aap-rpm-installation`.
-- The aap installer can be run on the host or on the controller node VM. This description focuses on running setup.sh from the host.
-- If running setup.sh on the host complains about the wrong ansible-core version (e.g. "Unable to install the required version of ansible-core (2.16)"), you should run setup.sh from a Python venv: 
-    ```
-    $ python3 -m venv ~/aap-venv
-    $ source ~/aap-venv/bin/activate
-    $ pip install --upgrade pip
-    $ pip install "setuptools<69"
-    $ pip install "ansible-core>=2.16,<2.17"
-    $ pip install packaging wheel
-    ```
-
 ## Steps to install AAP 2.4 or 2.5 on your laptop
 
 1. Download RHEL image from here: https://access.redhat.com/downloads/content/rhel
@@ -51,3 +37,38 @@ Notes:
 3. Make sure the `inventory-for-setup-x.x` contains the correct IPv4 addresses.
 4. Execute `setup.sh` in the setup-bundle from step 1 and pass the correct inventory for the target version, e.g. `~/repos/aap-rpm-installation/ansible-automation-platform-setup-bundle-2.5-17-x86_64/setup.sh -i ~/repos/aap-rpm-installation/inventory-for-setup-2.5`
 
+## Additional Information
+
+### General Notes
+
+- The following step-by-step instructions assume that the working directory is this repo, e.g. `~/repos/aap-rpm-installation`.
+- The aap installer can be run on the host or on the controller node VM. This description focuses on running setup.sh from the host.
+- If running setup.sh on the host complains about the wrong ansible-core version (e.g. "Unable to install the required version of ansible-core (2.16)"), you should run setup.sh from a Python venv: 
+    ```
+    $ python3 -m venv ~/aap-venv
+    $ source ~/aap-venv/bin/activate
+    $ pip install --upgrade pip
+    $ pip install "setuptools<69"
+    $ pip install "ansible-core>=2.16,<2.17"
+    $ pip install packaging wheel
+    ```
+
+### VM Snapshots
+
+When working with VMs it is good practice create snapshots at critical steps, e.g. before a backup is restored, or before an update is attempted.
+
+For details visit the [official documentation](https://www.libvirt.org/manpages/virsh.html#snapshot-commands).
+
+#### Creating a snapshot
+
+```
+sudo virsh snapshot-create-as --domain aap-controller --name 1-fresh-install --atomic
+```
+
+If you use `--disk-only` to save disk space, you have to shutdown the VM first, e.g. by `sudo virsh destroy aap-controller`.
+
+#### Reverting to a snapshot
+
+```
+sudo virsh snapshot-revert aap-controller 1-fresh-install
+```
