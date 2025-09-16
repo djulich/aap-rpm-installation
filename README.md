@@ -53,13 +53,24 @@ Notes:
     $ pip install packaging wheel
     ```
 
-### VM Snapshots
+### Working with VMs
+
+#### Connecting to a VM console
+
+```
+sudo virsh console aap-controller
+```
+You can only exit from this console with the escape character which is printed after the console has been created. Usually it is `^]` (`<ctrl>` + `]`).
+
+This is typically only needed if you don't have ssh setup for this VM already, otherwise just ssh into the VM.
+
+#### VM Snapshots
 
 When working with VMs it is good practice create snapshots at critical steps, e.g. before a backup is restored, or before an update is attempted.
 
 For details visit the [official documentation](https://www.libvirt.org/manpages/virsh.html#snapshot-commands).
 
-#### Creating a snapshot
+##### Creating a snapshot
 
 ```
 sudo virsh snapshot-create-as --domain aap-controller --name 1-fresh-install --atomic
@@ -67,7 +78,7 @@ sudo virsh snapshot-create-as --domain aap-controller --name 1-fresh-install --a
 
 If you use `--disk-only` to save disk space, you have to shutdown the VM first, e.g. by `sudo virsh destroy aap-controller`.
 
-#### Reverting to a snapshot
+##### Reverting to a snapshot
 
 List the available snaphots for a VM:
 ```
