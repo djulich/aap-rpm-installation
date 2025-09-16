@@ -69,6 +69,12 @@ If you use `--disk-only` to save disk space, you have to shutdown the VM first, 
 
 #### Reverting to a snapshot
 
+List the available snaphots for a VM:
+```
+sudo virsh snapshot-list aap-controller
+```
+
+Revert a VM to a snapshot:
 ```
 sudo virsh snapshot-revert aap-controller 1-fresh-install
 ```
