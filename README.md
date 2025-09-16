@@ -62,7 +62,7 @@ sudo virsh console aap-controller
 ```
 You can only exit from this console with the escape character which is printed after the console has been created. Usually it is `^]` (`<ctrl>` + `]`).
 
-This is typically only needed if you don't have ssh setup for this VM already, otherwise just ssh into the VM.
+This is typically only needed if you don't have ssh setup for this VM already, or to retrieve the VMs IP address with `ip a` (if the network in the VM is configured to DHCP and a `sudo virsh domifaddr <VM>` from the host doesn't return the VMs IP address, which sometimes happens). Otherwise just ssh into the VM.
 
 #### VM Snapshots
 
