@@ -58,6 +58,23 @@ Notes:
 
 ### Working with VMs
 
+#### Using virsh
+
+Maybe you have noticed that you can see your VMs only with either `virsh list --all` or `sudo virsh list --all`. This is because `virsh` connects to different `libvirt` instances in these two cases. To enforce always the same libvirt instance, add the following line to `~/.config/libvirt/libvirt.conf`:
+```
+uri_default = "qemu:///system"
+```
+
+Alternatively, you can also use an evironment variable to achieve the same:
+```
+export LIBVIRT_DEFAULT_URI=qemu:///system
+```
+
+Verify which URI `virsh` uses by
+```
+virsh uri
+```
+
 #### Connecting to a VM console
 
 ```
