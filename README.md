@@ -78,7 +78,7 @@ virsh uri
 #### Connecting to a VM console
 
 ```
-sudo virsh console aap-controller
+virsh console aap-controller
 ```
 You can only exit from this console with the escape character which is printed after the console has been created. Usually it is `^]` (`<ctrl>` + `]`).
 
@@ -93,7 +93,7 @@ For details visit the [official documentation](https://www.libvirt.org/manpages/
 ##### Creating a snapshot
 
 ```
-sudo virsh snapshot-create-as --domain aap-controller --name 1-fresh-install --atomic
+virsh snapshot-create-as --domain aap-controller --name 1-fresh-install --atomic
 ```
 
 If you use `--disk-only` to save disk space, you have to shutdown the VM first, e.g. by `sudo virsh destroy aap-controller`.
@@ -102,12 +102,12 @@ If you use `--disk-only` to save disk space, you have to shutdown the VM first, 
 
 List the available snaphots for a VM:
 ```
-sudo virsh snapshot-list aap-controller
+virsh snapshot-list aap-controller
 ```
 
 Revert a VM to a snapshot:
 ```
-sudo virsh snapshot-revert aap-controller 1-fresh-install
+virsh snapshot-revert aap-controller 1-fresh-install
 ```
 
 #### VM Time
@@ -118,7 +118,7 @@ After a VM is started or reverted to a snapshot, the time inside the VM is usual
 
 If the `qemu-guest-agent` is running on the VM, you can sync the VM time with the following command issued on the host:
 ```
-sudo virsh domtime <VM-NAME> --sync
+virsh domtime <VM-NAME> --sync
 ```
 
 You can also make libvirt issue this command whenever a VM is started, by adding the following line to `/etc/libvirt/hooks/qemu`:
