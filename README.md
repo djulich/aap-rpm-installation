@@ -37,6 +37,9 @@ Notes:
 3. Make sure the `inventory-for-setup-x.x` contains the correct IPv4 addresses.
 4. Execute `setup.sh` in the setup-bundle from step 1 and pass the correct inventory for the target version, e.g. `~/repos/aap-rpm-installation/ansible-automation-platform-setup-bundle-2.5-17-x86_64/setup.sh -i ~/repos/aap-rpm-installation/inventory-for-setup-2.5`
 
+Notes:
+- If the update process stops unexpectedly when setup wants to download some packages (e.g. cryptography) from the RHEl registry, it may be because the time on one of the node VMs is not synced. To fix the VM time, issue inside the VM: `sudo systemctl restart chronyd && sudo chronyc -a makestep` or, on the host: `sudo virsh domtime <VM-NAME> --sync`.
+
 ## Additional Information
 
 ### General Notes
@@ -89,3 +92,29 @@ Revert a VM to a snapshot:
 ```
 sudo virsh snapshot-revert aap-controller 1-fresh-install
 ```
+
+#### VM Time
+
+After a VM is started or reverted to a snapshot, the time inside the VM is usually way off. This can cause all kinds of problems, e.g. that a RHEL subscription is invalid because the activation key is not yet valid at the VM time.
+
+##### Sync time from the Host
+
+If the `qemu-guest-agent` is running on the VM, you can sync the VM time with the following command issued on the host:
+```
+sudo virsh domtime <VM-NAME> --sync
+```
+
+You can also make libvirt issue this command whenever a VM is started, by adding the following line to `/etc/libvirt/hooks/qemu`:
+```
+virsh domtime "$1" --sync
+```
+
+##### Sync time from inside the VM
+
+From inside the VM, you can sync the time with the following commands:
+```
+sudo systemctl restart chronyd
+sudo chronyc -a makestep
+```
+
+Note that it still takes a few seconds after these commands are issued until the VM time is actually synced.
