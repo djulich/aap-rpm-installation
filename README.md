@@ -28,7 +28,7 @@ This repository contains information and resource files to support AAP installat
 4. Execute `setup.sh` in the setup-bundle from step 1 with option -r, e.g. `~/repos/aap-rpm-installation/ansible-automation-platform-setup-bundle-2.4-6.2-x86_64/setup.sh -i ~/repos/aap-rpm-installation/inventory-for-setup-2.4 -r`
 
 Notes:
-- If the backup file is in another location (than the setup-bundle root), add `-e "restore_backup_file=<path-to-backup-file>"` to the `setup.sh` command line. Note that the backup must be a tar.gz file, it cannot be a folder.
+- If the backup file is in another location (than the setup-bundle root), add `-e "restore_backup_file=<path-to-backup-file>"` to the `setup.sh` command line. Note that the backup must be a `.tar.gz` file, it cannot be a folder.
 
 ## Steps for updating AAP
 
